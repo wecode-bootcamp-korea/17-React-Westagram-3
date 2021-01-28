@@ -1,0 +1,13 @@
+import React, { Component } from 'react';
+
+class LoginLee extends Component {
+  render() {
+    return (
+      <div>
+        
+      </div>
+    );
+  }
+}
+
+export default LoginLee;
