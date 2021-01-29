@@ -3,6 +3,44 @@ import Nav from "../../../Components/Nav/Nav";
 import "./Main.scss";
 
 class MainLee extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      newReply: "",
+      replyArr: [
+        {
+          valueKey: "",
+        },
+      ],
+    };
+  }
+
+  newComment = (e) => {
+    this.setState({
+      newReply: e.target.value,
+    });
+  };
+
+  pressEnter = (e) => {
+    if (e.key === "Enter" && this.state.newReply) {
+      this.add();
+      e.target.value = "";
+    }
+  };
+
+  add = () => {
+    let arr = this.state.replyArr;
+    arr.push({
+      valueKey: this.state.newReply,
+    });
+
+    this.setState({
+      replyArr: arr,
+      newReply: "",
+    });
+  };
+
   render() {
     return (
       <body id="main_layout">
@@ -124,6 +162,17 @@ class MainLee extends Component {
                       <i className="far fa-trash-alt reply_remove"></i>
                     </div>
                   </div>
+                  {this.state.replyArr.map((el) => (
+                    <div className="content_peed_text_reply">
+                      <div>
+                        <li>meeeeen93 {el.valueKey}</li>
+                      </div>
+                      <div>
+                        <i className="far fa-heart reply_like"></i>
+                        <i className="far fa-trash-alt reply_remove"></i>
+                      </div>
+                    </div>
+                  ))}
                 </ul>
               </div>
               <div className="content_peed_text_time">32분 전</div>
@@ -132,6 +181,8 @@ class MainLee extends Component {
                   type="text"
                   className="content_peed_reply"
                   placeholder="댓글 달기..."
+                  onChange={this.newComment}
+                  onKeyPress={this.pressEnter}
                 />
                 <input
                   type="submit"
