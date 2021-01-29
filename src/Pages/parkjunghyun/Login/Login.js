@@ -25,7 +25,7 @@ class LoginPark extends Component {
         pw: e.target.value,
       });
     }
-    console.log(this.state.id, this.state.pw);
+
     if (this.state.id) {
       const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,8}$/i;
       const isGoodId = this.state.id.match(regExp);

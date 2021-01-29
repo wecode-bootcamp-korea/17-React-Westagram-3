@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
+import Comments from '../Comments';
 import './MainLeft.scss';
 
 class MainLeft extends Component {
   constructor() {
     super();
+    this.addPost = this.addPost.bind(this);
     this.state = {
-      profileHTML: `<div class="profile"> <img src="images/parkjunghyun/profile.jpeg" /> <div class="name">asdf</div> </div>`,
+      isNewData: false,
     };
   }
+
+  addPost = (e) => {
+    e.preventDefault();
+    this.props.comments.unshift(e.target[0].value);
+    console.log(this.props.comments);
+    this.setState({
+      isNewData: true,
+    });
+  };
 
   render() {
     return (
       <section className="mainLeft">
         <section className="profiles">
-          <div
-            dangerouslySetInnerHTML={{ __html: this.state.profileHTML }}
-          ></div>
+          <div className="profile">
+            <img src="images/parkjunghyun/profile.jpeg" alt="profile" />
+            <div className="name">asdf</div>
+          </div>
         </section>
 
         <article className="feeds">
@@ -44,14 +56,17 @@ class MainLeft extends Component {
             <a href="www.google.com">#경주전원주택..</a>
           </div>
           <div id="writeTime">2분전</div>
-          <div className="writeCmt">
+          <form className="writeCmt" onSubmit={this.addPost}>
             <input
               type="text"
               className="postingCmt"
               placeholder="댓글 달기..."
             />
             <button id="post">게시</button>
-          </div>
+          </form>
+          {this.props.comments.map((comment) => {
+            return <Comments text={comment}></Comments>;
+          })}
         </article>
       </section>
     );
