@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Nav from "../../../Components/Nav/Nav";
+import Comment from "./Comment/Comment";
+
 import "./Main.scss";
 
 class MainLee extends Component {
@@ -8,11 +10,13 @@ class MainLee extends Component {
 
     this.state = {
       newReply: "",
-      replyArr: [
-        {
-          valueKey: "",
-        },
-      ],
+      replyArr: [],
+      // replyArr: [
+      //   {
+      //     // valueId: 1,
+      //     // valueKey: "",
+      //   },
+      // ],
     };
   }
 
@@ -24,24 +28,30 @@ class MainLee extends Component {
 
   pressEnter = (e) => {
     if (e.key === "Enter" && this.state.newReply) {
-      this.add();
-      e.target.value = "";
+      this.setState({
+        replyArr: this.state.replyArr.concat(this.state.newReply),
+        newReply: "",
+      });
     }
   };
 
   add = () => {
-    let arr = this.state.replyArr;
-    arr.push({
-      valueKey: this.state.newReply,
-    });
-
+    // let arr = this.state.replyArr;
     this.setState({
-      replyArr: arr,
-      newReply: "",
+      replyArr: this.state.replyArr.concat(this.state.newReply),
     });
+    // this.state.replyArr.push({
+    //   valueId: 1,
+    //   valueKey: this.state.newReply,
+    // });
+    // this.setState({
+    //   // replyArr: arr,
+    //   newReply: "",
+    // });
   };
 
   render() {
+    console.log("replyArr값은? " + this.state.replyArr);
     return (
       <body id="main_layout">
         <Nav></Nav>
@@ -162,16 +172,8 @@ class MainLee extends Component {
                       <i className="far fa-trash-alt reply_remove"></i>
                     </div>
                   </div>
-                  {this.state.replyArr.map((el) => (
-                    <div className="content_peed_text_reply">
-                      <div>
-                        <li>meeeeen93 {el.valueKey}</li>
-                      </div>
-                      <div>
-                        <i className="far fa-heart reply_like"></i>
-                        <i className="far fa-trash-alt reply_remove"></i>
-                      </div>
-                    </div>
+                  {this.state.replyArr.map((el, index) => (
+                    <Comment newReplyIdAdd={index} newReplyAdd={el} />
                   ))}
                 </ul>
               </div>
@@ -183,6 +185,7 @@ class MainLee extends Component {
                   placeholder="댓글 달기..."
                   onChange={this.newComment}
                   onKeyPress={this.pressEnter}
+                  value={this.state.newReply}
                 />
                 <input
                   type="submit"
