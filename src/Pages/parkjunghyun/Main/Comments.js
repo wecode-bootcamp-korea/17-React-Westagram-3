@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './components/MainLeft.scss';
+import './Comments.scss';
 
 export default class Comments extends Component {
   constructor() {

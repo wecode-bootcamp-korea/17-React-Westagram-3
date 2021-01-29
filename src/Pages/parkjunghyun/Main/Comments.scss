@@ -1,0 +1,23 @@
+/* 신규 댓글, 좋아요 이미지, 좋아요 수 및 삭제 버튼 style */
+.newCmt {
+  height: 1.5rem;
+  padding-left: 1rem;
+  // display: none;
+  img {
+    width: 20px;
+    margin-right: 10px;
+    height: auto;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  > * {
+    float: right;
+  }
+  button {
+    width: 50px;
+    height: 1.3rem;
+    background-color: wheat;
+    color: black;
+  }
+}

@@ -7,18 +7,12 @@ import '../../../Styles/common.scss';
 import './Main.scss';
 
 class MainPark extends Component {
-  constructor() {
-    super();
-    this.state = {
-      comments: [],
-    };
-  }
   render() {
     return (
       <>
         <Nav />
         <div className="main">
-          <MainLeft comments={this.state.comments} />
+          <MainLeft />
           <MainRight />
         </div>
       </>
