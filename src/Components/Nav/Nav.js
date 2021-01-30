@@ -28,10 +28,7 @@ class Nav extends Component {
               <i className="far fa-compass"></i>
               <i className="far fa-heart"></i>
               <button className="nav_bar_profile_btn">
-                <img
-                  src="/images/leejungmin/trunks.jpg"
-                  alt="nav_bar_profile_photo"
-                />
+                <img src="/images/trunks.jpg" alt="nav_bar_profile_photo" />
               </button>
               <div className="drop_box_main">
                 <div className="drop_box">

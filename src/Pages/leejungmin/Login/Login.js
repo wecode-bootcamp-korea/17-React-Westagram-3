@@ -34,7 +34,6 @@ class LoginLee extends Component {
     }
   };
   goToMain = (e) => {
-    // console.log(e.target.value);
     if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
       console.log("id 값은 =" + this.state.id);
       console.log("pwd 값은 =" + this.state.pwd);
@@ -45,9 +44,7 @@ class LoginLee extends Component {
       e.preventDefault();
     }
   };
-  // goToMain = () => {
-  //   this.props.history.push("/mainLee");
-  // };
+
   render() {
     return (
       <div>
