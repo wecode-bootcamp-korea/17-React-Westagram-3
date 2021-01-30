@@ -5,22 +5,36 @@ import './Login.scss';
 class LoginHeo extends Component {
   constructor(){
     super();
-    this.state = {id:"",
-    pw:"", 
-    backgroundcolor:"rgb(192, 223, 253)"};
+    this.state = {
+      id:"",
+      pw:"", 
+      backgroundcolor: "rgb(192, 223, 253)"
+    };
   }
 
   handleIdInput = (e) => {
     this.setState({
-      id : e.target.value
-    })
-  }
+      id : e.target.value,
+    });
+  };
 
   handlePwInput = (e) => {
     this.setState({
-      pw : e.target.value
-    })
-  }
+      pw : e.target.value,
+    });
+  };
+
+  loginKeyUp = () => {
+    if(this.state.id.includes('@') && this.state.pw.length >= 5 ) {
+      this.setState({
+        backgroundcolor: "rgb(8, 150, 247)"
+    });
+    } else {
+      this.setState({
+        backgroundcolor: "rgb(192, 223, 253)"
+    });
+    }
+  };
 
 
   render() {
@@ -28,10 +42,10 @@ class LoginHeo extends Component {
       <body>
         <section className="logincontainer">
           <p>Westagram</p>
-          <article className="loginbox">
-              <input  onChange={this.handleIdInput} name="id" className="loginId" type="text" placeholder="전화번호, 사용자 이름 또는 이메일"/>
-              <input  onChange={this.handlePwInput} name="pw" className="loginPw" type="password" placeholder="비밀번호"/> 
-              <button className="loginbtn">로그인</button>
+          <article  className="loginbox">
+              <input  onKeyUp={this.loginKeyUp} onChange={this.handleIdInput}  className="loginId" type="text" placeholder="전화번호, 사용자 이름 또는 이메일"/>
+              <input  onKeyUp={this.loginKeyUp} onChange={this.handlePwInput} className="loginPw" type="password" placeholder="비밀번호"/> 
+              <button style={{background : this.state.backgroundcolor}} className="loginbtn">로그인</button>
           </article>
           <h6 className="linestyle">또는</h6>
           <div className="bottomtext">
