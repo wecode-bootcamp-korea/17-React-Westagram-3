@@ -64,6 +64,7 @@ class MainLee extends Component {
           peedWriterName: "meeeeen93",
           peedText: "운동 전 준비 운동중에 찍혔네 ㅎ",
           peedReply: "piccolo 그래봤자 너 오공 못 이길듯ㅋㅋ",
+          peedLikeNum: 182,
         },
         {
           peedId: 2,
@@ -74,6 +75,7 @@ class MainLee extends Component {
           peedWriterName: "meeeeen93",
           peedText: "컷 !!",
           peedReply: "sonmonkey 나랑도 해볼래 ?ㅎ",
+          peedLikeNum: 312,
         },
         {
           peedId: 3,
@@ -84,6 +86,7 @@ class MainLee extends Component {
           peedWriterName: "meeeeen93",
           peedText: "이때로 돌아가고싶네 ^^ㅋㄷ",
           peedReply: "piccolo 이때도 못생겻네",
+          peedLikeNum: 166,
         },
         {
           peedId: 4,
@@ -93,12 +96,12 @@ class MainLee extends Component {
             "https://media.vlpt.us/images/93jm/post/0b45d742-364e-4c89-9a2e-e8259f54033f/trunks_girl.jpg",
           peedWriterName: "meeeeen93",
           peedText: "인사해라 애들아 내 여자친구 마이다ㅎ",
-          peedReply: "queen_cok 잘지내?..",
+          peedReply: "queen_cok 잘지내? DM 보냈었는데",
+          peedLikeNum: 213,
         },
       ],
     };
   }
-  // Story
 
   render() {
     const { storyArr, peedArr } = this.state;
@@ -109,13 +112,13 @@ class MainLee extends Component {
           <div className="main_content_left">
             <div className="content_story">
               {storyArr.map((story, index) => {
-                return <Story storyData={story} index={index} />;
+                return <Story storyData={story} key={index} />;
               })}
               <button className="testgo">&gt;</button>
               <i className="fas fa-angle-right"></i>
             </div>
             {peedArr.map((peed, index) => {
-              return <Peed peedData={peed} index={index} />;
+              return <Peed peedData={peed} key={index} />;
             })}
           </div>
           <div className="main_content_right_layout">

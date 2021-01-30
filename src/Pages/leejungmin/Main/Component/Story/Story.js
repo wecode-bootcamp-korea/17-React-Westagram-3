@@ -6,7 +6,7 @@ class Story extends Component {
     const { storyData } = this.props;
     return (
       <div className="story">
-        <div className="story_border" value={storyData.index}>
+        <div className="story_border">
           <img src={storyData.storyImg} alt="스토리1번" />
         </div>
         <span>{storyData.storyName}</span>

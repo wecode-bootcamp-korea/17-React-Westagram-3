@@ -4,6 +4,24 @@
   box-sizing: border-box;
 }
 
+@keyframes heartBeat {
+  0% {
+    transform: none;
+  }
+  50% {
+    color: tomato;
+    transform: scale(1.3);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.likeit_change {
+  color: #ed4956;
+  animation: heartBeat 0.5s;
+}
+
 .main_content {
   width: auto;
   height: auto;
@@ -192,16 +210,12 @@
 
           i {
             margin-left: 5px;
-            &:hover {
-              cursor: pointer;
-            }
+            cursor: pointer;
           }
+        }
 
-          /* 댓글 좋아요 기능 */
-          .reply_likeit {
-            color: #ed4956;
-            animation: heartBeat 0.5s;
-          }
+        .reply_remove {
+          display: none;
         }
       }
 

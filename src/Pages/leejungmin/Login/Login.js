@@ -69,13 +69,10 @@ class LoginLee extends Component {
                 className={
                   this.state.isDisabled ? "login_form_submit" : "color_change"
                 }
-                className="login_form_submit"
                 value="로그인"
                 onClick={this.goToMain}
                 disabled={this.state.isDisabled}
               ></input>
-              {/* <Link to="./Main" ></Link> */}
-              {/* 임시로 input에 disabled 값 뺌 */}
             </form>
             <span className="pwd_help">비밀번호를 잊으셨나요?</span>
           </div>

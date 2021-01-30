@@ -8,10 +8,11 @@ class Peed extends Component {
     this.state = {
       newReply: "",
       replyArr: [],
+      isPeedLike: false,
     };
   }
 
-  // Comment
+  // Comment Add
   newComment = (e) => {
     this.setState({
       newReply: e.target.value,
@@ -29,14 +30,26 @@ class Peed extends Component {
     this.setState({
       replyArr: this.state.replyArr.concat(this.state.newReply),
     });
-    console.log(this.state.replyArr);
+  };
+
+  // peed Like it!!
+  peedLikeUp = () => {
+    if (!this.state.isPeedLike) {
+      this.setState({
+        isPeedLike: true,
+      });
+    } else {
+      this.setState({
+        isPeedLike: false,
+      });
+    }
   };
 
   render() {
     const { peedData } = this.props;
     return (
       <div>
-        <div className="content_peed" value={peedData.index}>
+        <div className="content_peed">
           <div className="content_peed_header">
             <div className="content_peed_header_left">
               <img
@@ -53,7 +66,14 @@ class Peed extends Component {
           <div className="content_peed_option">
             <div className="content_peed_option_header">
               <div className="peed_option_header_left">
-                <i className="fas fa-heart likeit"></i>
+                <i
+                  className={
+                    this.state.isPeedLike
+                      ? "fas fa-heart likeit_change"
+                      : "fas fa-heart"
+                  }
+                  onClick={this.peedLikeUp}
+                ></i>
                 <i className="far fa-comment"></i>
                 <i className="far fa-paper-plane"></i>
               </div>
@@ -62,7 +82,15 @@ class Peed extends Component {
               </div>
             </div>
             <div className="content_peed_option_sub_header">
-              <span className="peed_option_sub_header_like">좋아요 285개</span>
+              <span className="peed_option_sub_header_like">
+                좋아요{" "}
+                <span>
+                  {this.state.isPeedLike
+                    ? peedData.peedLikeNum + 1
+                    : peedData.peedLikeNum}
+                </span>
+                개
+              </span>
             </div>
           </div>
           <div className="content_peed_text">
@@ -71,17 +99,8 @@ class Peed extends Component {
                 <span>{peedData.peedWriterName}</span>
                 <li>{peedData.peedText}</li>
               </div>
-              <div className="content_peed_text_reply">
-                <div>
-                  <li>{peedData.peedReply}</li>
-                </div>
-                <div>
-                  <i className="far fa-heart reply_like"></i>
-                  <i className="far fa-trash-alt reply_remove"></i>
-                </div>
-              </div>
               {this.state.replyArr.map((el, index) => (
-                <Comment newReplyIdAdd={index} newReplyAdd={el} />
+                <Comment key={index} newReplyAdd={el} />
               ))}
             </ul>
           </div>
