@@ -236,6 +236,7 @@
 				border-bottom: 1px solid rgb(211, 211, 211);
 
 				.firstSectionNav {
+					width: 300px;
 					display: flex;
 					flex-direction: row;
 					align-items: center;
@@ -247,7 +248,7 @@
 						background-image: url("https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s320x320/120349966_422763662018714_7835598670003667169_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=KRctBvoTtD0AX9KVMiT&tp=1&oh=c98d8b1dda7b9948db4f1268485cdf00&oe=6033973E");
 						background-size: 30px;
 						background-position: center;
-						display: block;
+						display: inline-block;
 						border: 0.5px solid rgb(211, 211, 211);
 						border-radius: 100%;
 					}
@@ -259,8 +260,8 @@
 					}
 
 					ul {
-						display: inline;
-						margin-left: -30px;
+						display: block;
+						margin-left: 10px;
 					}
 
 					.liName {
