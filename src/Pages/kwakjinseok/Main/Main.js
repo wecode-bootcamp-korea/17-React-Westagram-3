@@ -4,8 +4,28 @@ import "./Main.scss";
 class MainKwak extends Component {
 	constructor() {
 		super();
-		this.state = {};
+		this.state = {
+			commentInputValue: "",
+			addComments: [],
+		};
 	}
+
+	handleAddComment = (event) => {
+		this.setState({
+			commentInputValue: `${event.target.value}`,
+		});
+	};
+
+	addComment = (event) => {
+		if (this.state.commentInputValue.length > 0) {
+			this.state.addComments.push(this.state.commentInputValue);
+		}
+		const add = this.state.addComments;
+		const listAdd = add.map((added) => <li>{added}</li>);
+		this.setState({
+			addComments: listAdd,
+		});
+	};
 
 	render() {
 		return (
@@ -170,7 +190,7 @@ class MainKwak extends Component {
 											</a>
 										</div>
 									</div>
-									<div className="replyContainer"></div>
+									<ul className="replyContainer">{this.state.addComments}</ul>
 									<div className="smallTime">6시간 전</div>
 
 									<div className="lastOfFooter">
@@ -178,9 +198,17 @@ class MainKwak extends Component {
 											className="comment"
 											rows="10"
 											placeholder="댓글 달기..."
+											onChange={this.handleAddComment}
 										></textarea>
-										<button className="lastFooterButton" disabled="">
-											<div className="subInButton">게시</div>
+										<button
+											onClick={this.addComment}
+											className={
+												!this.state.commentInputValue
+													? "lastFooterButton"
+													: "activeFooterInButton"
+											}
+										>
+											게시
 										</button>
 									</div>
 								</footer>
