@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Comment from "../Comment/Comment";
+// import PEEDDATAARR from "./peedDataArr";
 import "./Peed.scss";
 
 class Peed extends Component {
@@ -12,12 +13,25 @@ class Peed extends Component {
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:3000/data/commentData.json", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          replyArr: data,
+        });
+      });
+  }
+
   // Comment Add
   newComment = (e) => {
     this.setState({
       newReply: e.target.value,
     });
   };
+
   pressEnter = (e) => {
     if (e.key === "Enter" && this.state.newReply) {
       this.setState({
@@ -26,6 +40,7 @@ class Peed extends Component {
       });
     }
   };
+
   add = () => {
     this.setState({
       replyArr: this.state.replyArr.concat(this.state.newReply),
@@ -47,6 +62,8 @@ class Peed extends Component {
 
   render() {
     const { peedData } = this.props;
+    console.log(this.state.newReply);
+    console.log(this.state.replyArr);
     return (
       <div>
         <div className="content_peed">
