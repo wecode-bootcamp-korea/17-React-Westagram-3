@@ -6,20 +6,52 @@ import './Feeds.scss';
 export default class Feeds extends Component {
   constructor() {
     super();
-    this.addPost = this.addPost.bind(this);
     this.state = {
-      isNewData: false,
+      comments: [],
+      commentValue: '',
     };
+
+    this.addPost = this.addPost.bind(this);
+    this.handleCommentValue = this.handleCommentValue.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/data/commentData.json', {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          comments: data,
+        });
+      });
+  }
+
+  handleCommentValue(e) {
+    this.setState({
+      commentValue: e.target.value,
+    });
   }
 
   addPost = (e) => {
     e.preventDefault();
-    this.props.comments.unshift(e.target[0].value);
-    console.log(this.props.comments);
+
+    const { comments, commentValue } = this.state;
+
     this.setState({
-      isNewData: true,
+      comments: [
+        ...comments,
+        {
+          id: comments.length + 1,
+          userName: 'wecode',
+          content: commentValue,
+          isLiked: false,
+        },
+      ],
     });
+    e.target[0].value = '';
   };
+
   render() {
     return (
       <article className="feeds">
@@ -53,11 +85,18 @@ export default class Feeds extends Component {
             type="text"
             className="postingCmt"
             placeholder="댓글 달기..."
+            onChange={this.handleCommentValue}
           />
           <button id="post">게시</button>
         </form>
-        {this.props.comments.map((comment) => {
-          return <Comments text={comment} />;
+        {this.state.comments.map((comment) => {
+          return (
+            <Comments
+              key={comment.id}
+              text={comment.content}
+              like={comment.isLiked}
+            />
+          );
         })}
       </article>
     );
