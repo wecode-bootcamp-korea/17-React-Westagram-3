@@ -2,10 +2,49 @@ import React, { Component } from 'react';
 import Nav from '../../../Components/Nav/Nav';
 import './Main.scss';
 
+
 class MainHeo extends Component {
+    constructor() {
+        super();
+        this.state= {
+            comment:"",
+            commentArr:[],
+            btnColor: "rgb(192, 208, 253)",
+        }
+    }
+
+    commentInput = (e) => {
+        this.setState({
+            comment:e.target.value,
+        })
+    }
+
+    btnColorChange = () => {
+        if(this.state.comment.length > 0 ) {
+            this.setState({
+                btnColor:"rgb(8, 150, 247)",
+            })
+        }else{
+            this.setState({
+                btnColor:"rgb(192, 208, 253)",
+            })
+        }
+    }
+
+    handleAddComment = (e) => {
+        e.preventDefault();
+        this.state.commentArr.push(this.state.comment);
+        this.setState({
+            commentArr: this.state.commentArr,
+            comment:"",
+        })
+    }
+    
+
+
   render() {
     return (
-          <body>
+          <div className="Main">
             <Nav/>
             <main className="mainbigbox">
                 <section className="leftbox">
@@ -31,10 +70,20 @@ class MainHeo extends Component {
                     <div className="commentBox">
                         <p className="feeduser">2929_9999</p>
                         <span>ᕕ( ᐛ )ᕗ 푸릇푸릇 제주 🌿</span>
+                        <div>
+                            {this.state.commentArr.map(comment => {
+                                return(
+                                    <div>
+                                        <span className="feeduser">2929_9999</span>
+                                        <span>{comment}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                     <div className="addcomment" autocomplete="off">
-                        <input className="commentline" type="text" placeholder="댓글 달기..." />
-                        <button className="submitbox" type="submit">게시</button>
+                        <input onKeyUp={this.btnColorChange} onChange={this.commentInput} value={this.state.comment}className="commentline" type="text" placeholder="댓글 달기..." />
+                        <button onClick={this.handleAddComment}style={{color : this.state.btnColor}}className="submitbox" type="submit">게시</button>
                     </div>
                     <article className="navfeedbox">
                         <img className="imguser" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/122097631_350277506082850_5249209957039124627_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=IMkv4r9iBd4AX8TPuH1&tp=1&oh=d18848c2f67ad737c0f226d6c6b70278&oe=603A2E91" alt="profile-img" />
@@ -73,7 +122,7 @@ class MainHeo extends Component {
                             <p className="endtextblueside">팔로우</p>
                     </aside>
             </main>
-        </body>
+        </div>
     );
   }
 }
