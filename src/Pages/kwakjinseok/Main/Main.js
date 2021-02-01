@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import "./Main.scss";
 
 class MainKwak extends Component {
+	constructor() {
+		super();
+		this.state = {};
+	}
+
 	render() {
 		return (
 			<div>

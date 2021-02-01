@@ -25,7 +25,7 @@ class LoginKwak extends Component {
 
 	goToMain = () => {
 		if (this.goToMain) {
-			alert("안녕하세요");
+			alert("로그인 성공!");
 		}
 		this.props.history.push("/mainKwak");
 	};
@@ -52,7 +52,17 @@ class LoginKwak extends Component {
 							onChange={this.handlePwInput}
 						/>
 
-						<button onClick={this.goToMain}>로그인</button>
+						<button
+							className={
+								this.state.idInputValue.indexOf("@") !== -1 &&
+								this.state.pwInputValue.length > 5
+									? "changeButtonColor"
+									: "normalButtonColor"
+							}
+							onClick={this.goToMain}
+						>
+							로그인
+						</button>
 					</main>
 
 					<footer>비밀번호를 잊었습니까?</footer>
