@@ -4,7 +4,7 @@ import './Feed.scss';
 export default class Feed extends Component {
   render() {
     return (
-      <div>
+      <div className="Feed">
         <div className="author">
           <img alt="profile" src={this.props.authorImgSrc} />
           <div className="authorText">

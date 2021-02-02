@@ -12,6 +12,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     margin: 0px;
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -23,12 +24,10 @@
       border: purple solid 1px;
     }
   }
-  .feeds {
-    width: 100%;
-    height: auto;
-    margin-top: 1.5rem;
-    border: #dbdbdb solid 1px;
-  }
+}
+
+.profile .name {
+  text-align: center;
 }
 
 /* width가 800px 이하로 떨어지면 우측 박스(.main-right) 사라짐 */

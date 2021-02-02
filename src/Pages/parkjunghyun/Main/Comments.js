@@ -30,7 +30,7 @@ export default class Comments extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Comments">
         <p className="newCmt">
           {this.props.text}
           <button onClick={this.deleteCmt}>삭제</button>

@@ -1,8 +1,3 @@
-/* 다른 사람 프로필 (가로슬라이드) 영역 스타일 */
-.name {
-  text-align: center;
-}
-
 /* .main container 내 피드 영역 스타일 */
 .author {
   display: flex;
@@ -24,13 +19,9 @@
   }
 }
 
-.feeds {
-  .mainImg {
+.Feed {
+  & > img {
     width: 100%;
-  }
-  > p {
-    margin-left: 2rem;
-    font-size: 0.8rem;
   }
   .feedIcons {
     display: flex;
@@ -56,7 +47,6 @@
     color: gray;
   }
 }
-
 /* .feed 내 댓글 관련 영역 스타일 */
 .writeCmt {
   border-top: #dbdbdb solid 1px;

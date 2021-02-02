@@ -47,7 +47,6 @@ export default class Feeds extends Component {
 
   addPost = (e) => {
     e.preventDefault();
-    console.log(this.state.commentValue);
 
     const { comments, commentValue } = this.state;
 
