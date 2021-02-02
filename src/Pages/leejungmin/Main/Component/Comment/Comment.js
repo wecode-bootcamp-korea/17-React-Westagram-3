@@ -44,6 +44,7 @@ class Comment extends Component {
         }
       >
         <div>
+          {/* <li>{"meeeeen93 " + newReplyAdd}</li> */}
           <li>
             {newReplyAdd.commentName} {newReplyAdd.commentContent}
           </li>

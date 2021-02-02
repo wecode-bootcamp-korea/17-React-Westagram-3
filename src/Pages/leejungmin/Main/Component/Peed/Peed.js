@@ -34,18 +34,24 @@ class Peed extends Component {
 
   pressEnter = (e) => {
     if (e.key === "Enter" && this.state.newReply) {
+      const newComment = {
+        commentId: Date.now(),
+        commentName: "meeeeen93",
+        commentContent: this.state.newReply,
+      };
+      console.log("fefwf", newComment);
       this.setState({
-        replyArr: this.state.replyArr.concat(this.state.newReply),
+        replyArr: this.state.replyArr.concat(newComment),
         newReply: "",
       });
     }
   };
 
-  add = () => {
-    this.setState({
-      replyArr: this.state.replyArr.concat(this.state.newReply),
-    });
-  };
+  // add = () => {
+  //   this.setState({
+  //     replyArr: this.state.replyArr.concat(this.state.newReply),
+  //   });
+  // };
 
   // peed Like it!!
   peedLikeUp = () => {
@@ -62,8 +68,9 @@ class Peed extends Component {
 
   render() {
     const { peedData } = this.props;
-    console.log(this.state.newReply);
-    console.log(this.state.replyArr);
+    // console.log(this.state.newReply);
+    // console.log(this.state.replyArr);
+
     return (
       <div>
         <div className="content_peed">
