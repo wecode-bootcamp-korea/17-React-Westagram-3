@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Comment from "./Comment";
 import "./Main.scss";
 
 class MainKwak extends Component {
@@ -16,15 +17,34 @@ class MainKwak extends Component {
 		});
 	};
 
-	addComment = (event) => {
-		if (this.state.commentInputValue.length > 0) {
-			this.state.addComments.push(this.state.commentInputValue);
+	handleAddComment2 = (event) => {
+		if (event.keyCode === 13 && this.state.commentInputValue) {
+			this.setState({
+				addComments: this.state.addComments.concat(
+					this.state.commentInputValue
+				),
+				commentInputValue: "",
+			});
 		}
-		const add = this.state.addComments;
-		const listAdd = add.map((added) => <li>{added}</li>);
-		this.setState({
-			addComments: listAdd,
-		});
+	};
+
+	addComment = (event) => {
+		if (this.state.commentInputValue) {
+			this.setState({
+				commentInputValue: "",
+				addComments: this.state.addComments.concat(
+					this.state.commentInputValue
+				),
+			});
+
+			// this.state.addComments.push(this.state.commentInputValue);
+		}
+		// const add = this.state.addComments;
+		// const listAdd = add.map((added) => <li>{added}</li>);
+		// this.setState({
+		// 	addComments: ,a
+		// });
+		event.preventDefault();
 	};
 
 	render() {
@@ -95,7 +115,7 @@ class MainKwak extends Component {
 									<div className="firstSectionNav">
 										<div className="imgCircle"></div>
 
-										<ul class="ulInCenterMain">
+										<ul className="ulInCenterMain">
 											<li className="liName">xolovemirjam</li>
 											<li className="liContent">Seoul</li>
 										</ul>
@@ -190,15 +210,20 @@ class MainKwak extends Component {
 											</a>
 										</div>
 									</div>
-									<ul className="replyContainer">{this.state.addComments}</ul>
+
+									<ul className="replyContainer">
+										<Comment commentList={this.state.addComments} />
+									</ul>
 									<div className="smallTime">6시간 전</div>
 
 									<div className="lastOfFooter">
 										<textarea
 											className="comment"
+											value={this.state.commentInputValue}
 											rows="10"
 											placeholder="댓글 달기..."
 											onChange={this.handleAddComment}
+											onKeyUp={this.handleAddComment2}
 										></textarea>
 										<button
 											onClick={this.addComment}

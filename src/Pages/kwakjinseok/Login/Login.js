@@ -59,6 +59,12 @@ class LoginKwak extends Component {
 									? "changeButtonColor"
 									: "normalButtonColor"
 							}
+							disabled={
+								this.state.idInputValue.indexOf("@") !== -1 &&
+								this.state.pwInputValue.length > 5
+									? false
+									: true
+							}
 							onClick={this.goToMain}
 						>
 							로그인
