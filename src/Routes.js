@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //진석 컴포넌트
-import LoginKwak from './Pages/kwakjinseok/Login/Login'
-import MainKwak from './Pages/kwakjinseok/Main/Main'
+import LoginKwak from "./Pages/kwakjinseok/Login/Login";
+import MainKwak from "./Pages/kwakjinseok/Main/Main";
 //혜성 컴포넌트
-import LoginHeo from './Pages/heohyesung/Login/Login'
-import MainHeo from './Pages/heohyesung/Main/Main'
+import LoginHeo from "./Pages/heohyesung/Login/Login";
+import MainHeo from "./Pages/heohyesung/Main/Main";
 //정현 컴포넌트
-
-import LoginPark from './Pages/parkjunghyun/Login/Login'
-import MainPark from './Pages/parkjunghyun/Main/Main'
+import LoginPark from "./Pages/parkjunghyun/Login/Login";
+import MainPark from "./Pages/parkjunghyun/Main/Main";
 //정민 컴포넌트
-import LoginLee from './Pages/leejungmin/Login/Login'
-import MainLee from './Pages/leejungmin/Main/Main'
+import LoginLee from "./Pages/leejungmin/Login/Login";
+import MainLee from "./Pages/leejungmin/Main/Main";
 
 export default class Routes extends Component {
   render() {
@@ -32,5 +31,3 @@ export default class Routes extends Component {
     );
   }
 }
-
-
