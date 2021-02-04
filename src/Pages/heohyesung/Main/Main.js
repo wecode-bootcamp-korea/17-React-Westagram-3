@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Nav from '../../../Components/Nav/Nav';
-import Comment from '../Main/Comment/Comment'
+//import Storybox from '../Main/Storybox/Storybox';
+//import STORYFEED from './Storyfeed/Storyfeed.js';
+import Comment from '../Main/Comment/Comment';
 import './Main.scss';
+import Storybox from '../Main/Storybox/Storybox'
+//import Storybox from './Storyfeed/Storyfeed.js';
+//import Storyfeed from './Storyfeed/Storyfeed.js';
 
 
 class MainHeo extends Component {
@@ -11,7 +16,30 @@ class MainHeo extends Component {
             comment:"",
             commentArr:[],
             btnColor: "rgb(192, 208, 253)",
+            storyBox:[],
         }
+    }
+
+    componentDidMount () {
+        fetch('/data/commentData.json', {
+            method : 'GET'
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    commentArr : data,
+                });
+            });
+        
+        fetch('/data/storyFeedData.json', {
+            method : 'GET'
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    storyBox: data,
+                });
+            });
     }
 
     commentInput = (e) => {
@@ -34,69 +62,85 @@ class MainHeo extends Component {
 
     handleAddComment = (e) => {
         e.preventDefault();
-        this.state.commentArr.push(this.state.comment);
-        this.setState({
-            commentArr: this.state.commentArr,
-            comment:"",
-        })
+        if(this.state.comment) {
+            this.setState({
+                commentArr: [
+                    ...this.state.commentArr,
+                    {userName: "2929_9999",
+                    comment: this.state.comment},
+                ],
+                comment: "",
+            })
+        }
     }
     
-
-
   render() {
+    const { commentArr, comment, storyBox } = this.state;
     return (
-          <div className="Main">
+        <div className="Main">
             <Nav/>
             <main className="mainbigbox">
                 <section className="leftbox">
-                    <article className="storybox">
-                        <img className="imgwat" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s320x320/140495294_680430929319006_6435973614198225556_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=O8eIU0pLkqYAX-9Ltjn&tp=1&oh=31ae8e602c8d79b8892c947eb9407de5&oe=603667F8" alt="watcha-img" />
-                        <p className="textwat">watcha_kr</p>
-                    </article>
-                    <article className="navfeedbox">
+                    <div className="storyboxContainer">
+                    {storyBox.map((story) => {
+                        return(
+                            <Storybox
+                                key = {story.id}
+                                name = {story.userName}
+                                img = {story.img}
+                            />
+                        );
+                    })}
+                    </div>
+                    <div className="navfeedbox">
                         <img className="imguser" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/122097631_350277506082850_5249209957039124627_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=IMkv4r9iBd4AX8TPuH1&tp=1&oh=d18848c2f67ad737c0f226d6c6b70278&oe=603A2E91" alt="profile-img" />
                         <p className="userid">2929_9999</p>
-                    </article>
-                    <article className="feedbox">
+                    </div>
+                    <div className="feedbox">
                         <img className="imgjeju" src="/images/heohyesung/jeju.jpg" alt="jeju-img" />
-                    </article>
-                    <article className="commentfirstbox">
+                    </div>
+                    <div className="commentfirstbox">
                         <ul className="commenticons">
                             <i className="far fa-heart"></i>
                             <i className="far fa-comment"></i>
                             <i className="far fa-paper-plane"></i>
                             <p className="like">좋아요 100개</p>
                         </ul>
-                    </article>
+                    </div>
                     <div className="commentBox">
                         <p className="feeduser">2929_9999</p>
                         <span>ᕕ( ᐛ )ᕗ 푸릇푸릇 제주 🌿</span>
                         <div>
-                            {this.state.commentArr.map(comment => {
-                                return <Comment key={this.commment} commentText={comment}/>
-                                
+                            {commentArr.map(comment => {
+                                return (
+                                    <Comment 
+                                        key = {comment.id} 
+                                        name = {comment.userName}
+                                        comment = {comment.comment}
+                                    />
+                                );
                             })}
                         </div>
                     </div>
                     <form onSubmit={this.handleAddComment} className="addcomment" autocomplete="off">
-                        <input onKeyUp={this.btnColorChange} onChange={this.commentInput} value={this.state.comment}className="commentline" type="text" placeholder="댓글 달기..." />
+                        <input onKeyUp={this.btnColorChange} onChange={this.commentInput} value={comment}className="commentline" type="text" placeholder="댓글 달기..." />
                         <button style={{color : this.state.btnColor}}className="submitbox" type="submit">게시</button>
                     </form>
-                    <article className="navfeedbox">
-                        <img className="imguser" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/122097631_350277506082850_5249209957039124627_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=IMkv4r9iBd4AX8TPuH1&tp=1&oh=d18848c2f67ad737c0f226d6c6b70278&oe=603A2E91" alt="profile-img" />
+                    <div className="navfeedbox">
+                    <img className="imguser" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/122097631_350277506082850_5249209957039124627_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=IMkv4r9iBd4AX8TPuH1&tp=1&oh=d18848c2f67ad737c0f226d6c6b70278&oe=603A2E91" alt="profile-img" />
                         <p className="userid">2929_9999</p>
-                        </article>
-                    <article className="feedbox">
+                        </div>
+                    <div className="feedbox">
                         <img className="imgjeju" src="/images/heohyesung/horse.jpg" alt="horse-img" />
-                    </article>
-                    <article className="commentfirstbox">
+                    </div>
+                    <div className="commentfirstbox">
                         <ul className="commenticons">
                             <i className="far fa-heart"></i>
                             <i className="far fa-comment"></i>
                             <i className="far fa-paper-plane"></i>
                             <p className="like">좋아요 100개</p>
                         </ul>
-                    </article>
+                    </div>
                     <div className="commentBox">
                         <p className="feeduser">2929_9999</p>
                         <span>제주도🌷 + 말 🐴 + 해☀️ = 환상적 ✨</span>
@@ -105,13 +149,13 @@ class MainHeo extends Component {
                         <input className="commentline" type="text" placeholder="댓글 달기..." />
                         <button className="submitbox" type="submit">게시</button>
                     </div>
-                    </section>
+                </section>
                     <aside className="rightbox">
-                        <article className="side">
+                        <section className="side">
                             <img className="imgsideuser" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/122097631_350277506082850_5249209957039124627_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=IMkv4r9iBd4AX8TPuH1&tp=1&oh=d18848c2f67ad737c0f226d6c6b70278&oe=603A2E91" alt="profile-img" />
                             <span className="sideuserid">2929_9999</span>
                             <p className="endtextblue">전환</p>
-                        </article>
+                        </section>
                             <p className="sidetext">회원님을 위한 추천</p>
                             <p className="endtext">모두보기</p>
                             <img className="iuimg" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s320x320/28434316_190831908314778_1954023563480530944_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=p4hC8hEj-GUAX8SM1-f&tp=1&oh=751edc3eae0f3f44b4fcfb00a0438cb5&oe=60367030" alt="iuimg" />

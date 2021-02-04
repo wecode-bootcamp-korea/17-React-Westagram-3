@@ -8,66 +8,84 @@ class LoginHeo extends Component {
     this.state = {
       id: "",
       pw: "",
-      backgroundcolor: "rgb(192, 223, 253)",
+      backgroundcolor: false,
     };
   }
 
-  handleIdInput = (e) => {
+  handleInput = (e) => {
+    const { value, name } = e.target;
     this.setState({
-      id: e.target.value,
-    });
-  };
+      [name]: value,
+    })
+    console.log(this.state)
+  }
 
-  handlePwInput = (e) => {
-    this.setState({
-      pw: e.target.value,
-    });
-  };
-
-  loginKeyUp = () => {
-    if (this.state.id.includes("@") && this.state.pw.length >= 5) {
-      this.setState({
-        backgroundcolor: "rgb(8, 150, 247)",
-      });
-    } else {
-      this.setState({
-        backgroundcolor: "rgb(192, 223, 253)",
-      });
+//로그인
+  goToMain = (e) => {
+    e.preventDefault();
+    fetch("http://10.58.1.56:8000/user/login",  {
+      method: "POST",
+      body: JSON.stringify({
+        email: this.state.id,
+        password: this.state.pw,
+      }),
+    })
+    .then((response) => response.json())
+    .then((result) => {
+      if(result.message === "SUCCESS") {
+        localStorage.setItem("token",result.token)
+      }else {
+        alert("실패")
+      }
     }
-  };
+  
+    )}
 
+//회원가입
   goToMain = () => {
-    this.props.history.push("/mainHeo");
-  };
+    fetch("10.58.1.56:8000/user",  {
+      method: "POST",
+      body: JSON.stringify({
+        email: this.state.id,
+        password: this.state.pw,
+      }),
+    })
+    .then((response) => response.json())
+    .then((result) => 
+      result.message === "" ?
+      this.props.history.push('/loginHeo') 
+      :alert("회원가입실패") 
+    )
+  }
 
   render() {
+    const { id, pw } = this.state;
     return (
-      <body>
+      <div className="Login">
         <section className="logincontainer">
           <p>Westagram</p>
-          <article className="loginbox">
+          <form className="loginbox">
             <input
-              onKeyUp={this.loginKeyUp}
-              onChange={this.handleIdInput}
+              onChange={this.handleInput}
               className="loginId"
               type="text"
+              name="id"
               placeholder="전화번호, 사용자 이름 또는 이메일"
             />
             <input
-              onKeyUp={this.loginKeyUp}
-              onChange={this.handlePwInput}
+              onChange={this.handleInput}
               className="loginPw"
               type="password"
+              name="pw"
               placeholder="비밀번호"
             />
             <button
               onClick={this.goToMain}
-              style={{ background: this.state.backgroundcolor }}
-              className="loginbtn"
+              className={ id.includes('@') && pw.length >= 5 ? "tureColor" : "falseColor"}
             >
               로그인
             </button>
-          </article>
+          </form>
           <h6 className="linestyle">또는</h6>
           <div className="bottomtext">
             <div className="facebook">
@@ -77,7 +95,7 @@ class LoginHeo extends Component {
             <h6>비밀번호를 잊으셨나요?</h6>
           </div>
         </section>
-      </body>
+      </div>
     );
   }
 }

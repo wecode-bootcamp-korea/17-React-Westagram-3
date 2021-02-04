@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './Comment.scss';
 
 class Comment extends Component {
   render() {
     return (
       <div>
-        <span className="feeduser">2929_9999</span>
-        <span>{this.props.commentText}</span>
+        <span className="feeduser">{this.props.name}</span>
+        <span>{this.props.comment}</span>
       </div>
     );
   }
