@@ -267,6 +267,18 @@
             cursor: default;
           }
         }
+
+        .content_peed_submit_on {
+          position: absolute;
+          outline: none;
+          border: none;
+          background-color: white;
+          right: 10px;
+          top: 30px;
+          color: #0095f6;
+          font-weight: bold;
+          cursor: pointer;
+        }
       }
     }
   }

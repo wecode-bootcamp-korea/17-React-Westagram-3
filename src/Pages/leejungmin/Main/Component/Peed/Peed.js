@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Comment from "../Comment/Comment";
-// import PEEDDATAARR from "./peedDataArr";
 import "./Peed.scss";
 
 class Peed extends Component {
@@ -10,13 +9,12 @@ class Peed extends Component {
       newReply: "",
       replyArr: [],
       isPeedLike: false,
+      isReplyAddBtn: false,
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/data/commentData.json", {
-      method: "GET",
-    })
+    fetch("/data/commentData.json")
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -25,40 +23,66 @@ class Peed extends Component {
       });
   }
 
-  // Comment Add
+  // Comment Change
   newComment = (e) => {
-    this.setState({
-      newReply: e.target.value,
-    });
+    this.setState(
+      {
+        newReply: e.target.value,
+      },
+      () => {
+        const { newReply } = this.state;
+        const isBtnActive = newReply.length > 0;
+        this.setState({
+          isReplyAddBtn: isBtnActive,
+        });
+      }
+    );
   };
 
+  // Enter Comment Add
   pressEnter = (e) => {
-    if (e.key === "Enter" && this.state.newReply) {
-      const newComment = {
-        commentId: Date.now(),
-        commentName: "meeeeen93",
-        commentContent: this.state.newReply,
-      };
-      // const newComments = this.state.replyArr.concat(newComment);
+    const { newReply } = this.state;
 
-      const newComments = [...this.state.replyArr, newComment];
-
-      this.setState({
-        replyArr: newComments,
-        newReply: "",
-      });
+    if (e.key === "Enter" && newReply) {
+      this.addComment();
     }
   };
 
-  // add = () => {
-  //   this.setState({
-  //     replyArr: this.state.replyArr.concat(this.state.newReply),
-  //   });
-  // };
+  // Click Comment Add
+  clickAddComment = (e) => {
+    const { newReply } = this.state;
+
+    e.preventDefault();
+    if (newReply) {
+      this.addComment();
+    }
+  };
+
+  addComment = () => {
+    const { newReply, replyArr } = this.state;
+
+    const newComment = {
+      commentId: Date.now(),
+      commentName: "meeeeen93",
+      commentContent: newReply,
+    };
+
+    const newComments = [...replyArr, newComment];
+
+    this.setState(
+      {
+        replyArr: newComments,
+        newReply: "",
+        isReplyAddBtn: false,
+      },
+      () => console.log("state", this.state)
+    );
+  };
 
   // peed Like it!!
   peedLikeUp = () => {
-    if (!this.state.isPeedLike) {
+    const { isPeedLike } = this.state;
+    if (!isPeedLike) {
       this.setState({
         isPeedLike: true,
       });
@@ -71,8 +95,10 @@ class Peed extends Component {
 
   render() {
     const { peedData } = this.props;
-    // console.log(this.state.newReply);
-    // console.log(this.state.replyArr);
+    const { isPeedLike, newReply, replyArr, isReplyAddBtn } = this.state;
+    console.log("초기화 될때", newReply);
+    console.log("길이가궁금해 ?", newReply.length);
+    console.log("버튼~", isReplyAddBtn);
 
     return (
       <div>
@@ -95,9 +121,7 @@ class Peed extends Component {
               <div className="peed_option_header_left">
                 <i
                   className={
-                    this.state.isPeedLike
-                      ? "fas fa-heart likeit_change"
-                      : "fas fa-heart"
+                    isPeedLike ? "fas fa-heart likeit_change" : "fas fa-heart"
                   }
                   onClick={this.peedLikeUp}
                 ></i>
@@ -112,9 +136,7 @@ class Peed extends Component {
               <span className="peed_option_sub_header_like">
                 좋아요
                 <span>
-                  {this.state.isPeedLike
-                    ? peedData.peedLikeNum + 1
-                    : peedData.peedLikeNum}
+                  {isPeedLike ? peedData.peedLikeNum + 1 : peedData.peedLikeNum}
                 </span>
                 개
               </span>
@@ -126,8 +148,8 @@ class Peed extends Component {
                 <span>{peedData.peedWriterName}</span>
                 <li>{peedData.peedText}</li>
               </div>
-              {this.state.replyArr.map((el, index) => (
-                <Comment key={index} newReplyAdd={el} />
+              {replyArr.map((el, index) => (
+                <Comment newReplyAdd={el} key={index} />
               ))}
             </ul>
           </div>
@@ -139,13 +161,19 @@ class Peed extends Component {
               placeholder="댓글 달기..."
               onChange={this.newComment}
               onKeyPress={this.pressEnter}
-              value={this.state.newReply}
+              value={newReply}
             />
             <input
               type="submit"
-              className="content_peed_submit"
+              className={
+                !isReplyAddBtn
+                  ? "content_peed_submit"
+                  : "content_peed_submit_on"
+              }
+              // className="content_peed_submit"
               value="게시"
-              disabled
+              onClick={this.clickAddComment}
+              disabled={!isReplyAddBtn}
             />
           </form>
         </div>

@@ -8,9 +8,9 @@ class LoginLee extends Component {
     this.state = {
       id: "",
       pwd: "",
-      isDisabled: true,
-      name: "jungmin",
-      phone: "010-1234-5678",
+      // isDisabled: true,
+      // name: "jungmin",
+      // phone: "010-1234-5678",
     };
   }
   idSet = (e) => {
@@ -24,47 +24,13 @@ class LoginLee extends Component {
     });
   };
 
-  // loginValid = (e) => {
-  // e.preventDefault();
-
-  //   if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
-  //     this.setState({
-  //       isDisabled: false,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       isDisabled: true,
-  //     });
-  //   }
-  // };
-  btnCheck = (e) => {
-    if (!this.state.id || this.state.pwd >= 5) {
-      this.idSet(e);
-    } else if (this.state.id || !this.state.pwd) {
-      this.pwdSet(e);
-    }
-    if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
-      this.setState({
-        isDisabled: false,
-      });
-    } else {
-      this.setState({
-        isDisabled: true,
-      });
-    }
-  };
-
   goToMain = () => {
     this.props.history.push("/mainLee");
   };
 
   loginValid = (e) => {
     e.preventDefault();
-
     if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
-      this.setState({
-        isDisabled: false,
-      });
       fetch("http://10.58.4.186:8000/user", {
         method: "POST",
         body: JSON.stringify({
@@ -73,18 +39,11 @@ class LoginLee extends Component {
           // name: this.state.name,
           // phone: this.state.phone,
         }),
-      })
-        .then((response) => response.json())
-        .then((res) => this.joinCheckResult(res));
+      }).then((response) => response.json());
+      // .then((res) => this.joinCheckResult(res));
       // .then((res) => this.loginCheckResult(res));
       // .then((res) => console.log("백엔드에서 온 데이터 : ", res));
-      // alert(this.state.id + "님 어서오세용");
-      // this.props.history.push("/mainLee");
-      console.log(this.state.isDisabled);
     } else {
-      this.setState({
-        isDisabled: true,
-      });
       alert("아이디와 비밀번호 입력 기준이 틀렸습니다 !");
     }
   };
@@ -107,9 +66,6 @@ class LoginLee extends Component {
     }
   };
   render() {
-    console.log(this.state.isDisabled);
-    console.log("아이디", this.state.id);
-    console.log("비번", this.state.pwd);
     return (
       <div>
         <main className="container_main_login">
@@ -137,7 +93,7 @@ class LoginLee extends Component {
                 }
                 value="로그인"
                 onClick={this.loginValid}
-                disabled={this.state.isDisabled}
+                // disabled={this.state.isDisabled}
               ></input>
             </form>
             <span className="pwd_help">비밀번호를 잊으셨나요?</span>

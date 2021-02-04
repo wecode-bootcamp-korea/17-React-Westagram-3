@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Comment.scss";
-// import "./Main.scss";
 
 class Comment extends Component {
   constructor() {

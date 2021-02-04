@@ -72,8 +72,10 @@ class MainLee extends Component {
 
   render() {
     const { storyArr, peedArr } = this.state;
+
     return (
-      <body id="main_layout">
+      <div>
+        {/* <body id="main_layout"> */}
         <Nav></Nav>
         <main className="main_content">
           <div className="main_content_left">
@@ -186,7 +188,8 @@ class MainLee extends Component {
             </div>
           </div>
         </main>
-      </body>
+        {/* </body> */}
+      </div>
     );
   }
 }

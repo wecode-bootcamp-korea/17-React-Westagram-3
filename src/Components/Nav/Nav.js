@@ -7,21 +7,21 @@ class Nav extends Component {
       <nav className="nav_container">
         <div className="nav_container_sub">
           <div className="nav_left">
-            <i className="fab fa-instagram"></i>
+            <i className="fab fa-instagram" />
             <span className="nav_logo">Westagram</span>
           </div>
           <div className="nav_center">
             <form className="nav_center_search">
               <input type="text" className="center_search" placeholder="검색" />
-              <i className="fas fa-search search_icon"></i>
-              <i className="fas fa-times-circle cancle_icon"></i>
+              <i className="fas fa-search search_icon" />
+              <i className="fas fa-times-circle cancle_icon" />
             </form>
           </div>
           <div className="nav_right">
-            <i className="fas fa-home"></i>
-            <i className="far fa-paper-plane nav_right_plane"></i>
-            <i className="far fa-compass"></i>
-            <i className="far fa-heart"></i>
+            <i className="fas fa-home" />
+            <i className="far fa-paper-plane nav_right_plane" />
+            <i className="far fa-compass" />
+            <i className="far fa-heart" />
             <button className="nav_bar_profile_btn">
               <img src="/images/trunks.jpg" alt="nav_bar_profile_photo" />
             </button>
@@ -29,19 +29,19 @@ class Nav extends Component {
               <div className="drop_box">
                 <div className="drop_box_top">
                   <div className="drop_box_box">
-                    <i className="far fa-user"></i>
+                    <i className="far fa-user" />
                     <span>프로필</span>
                   </div>
                   <div className="drop_box_box">
-                    <i className="far fa-bookmark"></i>
+                    <i className="far fa-bookmark" />
                     <span>저장됨</span>
                   </div>
                   <div className="drop_box_box">
-                    <i className="fas fa-cog"></i>
+                    <i className="fas fa-cog" />
                     <span>설정</span>
                   </div>
                   <div className="drop_box_box">
-                    <i className="fas fa-sync"></i>
+                    <i className="fas fa-sync" />
                     <span>계정 전환</span>
                   </div>
                 </div>
