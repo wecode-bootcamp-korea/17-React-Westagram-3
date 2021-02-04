@@ -1,4 +1,4 @@
-@import "../../styles/common.scss";
+@import '../../styles/common.scss';
 
 .nav_container {
   width: 100%;
@@ -31,7 +31,7 @@
       }
 
       .nav_logo {
-        font-family: "Lobster", cursive;
+        font-family: 'Lobster', cursive;
         font-size: 25px;
         margin-left: 15px;
       }
@@ -181,6 +181,7 @@
           }
         }
       }
+
       .drop_box_diamond {
         width: 18px;
         height: 18px;

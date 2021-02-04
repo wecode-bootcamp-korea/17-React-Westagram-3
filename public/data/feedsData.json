@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "authorImgSrc": "https://i.pinimg.com/originals/54/7a/9c/547a9cc6b93e10261f1dd8a8af474e03.jpg",
+    "authorName": "해골",
+    "authorLocation": "지옥",
+    "mainImgSrc": "https://i.pinimg.com/originals/ba/39/5a/ba395a4e2324999393495369b853263f.jpg ",
+    "commentAuthor": "해골2",
+    "commentHash": "#무서워",
+    "commentTime": "1시간 전"
+  },
+  {
+    "id": 2,
+    "authorImgSrc": "https://wallpapercave.com/wp/wp2550666.jpg",
+    "authorName": "방랑자",
+    "authorLocation": "산속",
+    "mainImgSrc": "https://c8.alamy.com/comp/E730KJ/beautiful-maple-with-nice-background-for-adv-or-others-purpose-use-E730KJ.jpg",
+    "commentAuthor": "나무",
+    "commentHash": "#자연",
+    "commentTime": "50분 전"
+  },
+  {
+    "id": 3,
+    "authorImgSrc": "https://wallpapercave.com/wp/Bzs7gW9.jpg",
+    "authorName": "전구",
+    "authorLocation": "서울",
+    "mainImgSrc": "https://images.france.fr/zeaejvyq9bhj/4uWgLZlyd5FWsyKuyI6FWT/3c0d4287edb05e0382c40c96ffed72e2/Nice__Sergii_Figurnyi_-_AdobeStock.jpg?w=1200&h=630&q=70&fl=progressive&fit=fill",
+    "commentAuthor": "프랜치",
+    "commentHash": "#니스",
+    "commentTime": "5분 전"
+  }
+]

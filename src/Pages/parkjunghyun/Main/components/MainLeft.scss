@@ -1,0 +1,38 @@
+/* .main 내 좌측(-left) container 스타일 */
+.mainLeft {
+  width: 60%;
+  margin: 5rem 0 1.5rem 0;
+  .profiles {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem 0;
+    border: #dbdbdb solid 1px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    margin: 0px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    img {
+      width: 65px;
+      height: 65px;
+      margin: 0 10px;
+      border-radius: 50%;
+      border: purple solid 1px;
+    }
+  }
+}
+
+.profile .name {
+  text-align: center;
+}
+
+/* width가 800px 이하로 떨어지면 우측 박스(.main-right) 사라짐 */
+@media screen and (max-width: 800px) {
+  .mainLeft {
+    width: 100%;
+  }
+}
