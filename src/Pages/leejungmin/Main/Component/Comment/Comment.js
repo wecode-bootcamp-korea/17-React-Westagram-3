@@ -13,48 +13,40 @@ class Comment extends Component {
 
   // Comment Delete
   replyDelete = () => {
-    if (!this.state.isReplyDelete) {
-      this.setState({
-        isReplyDelete: true,
-      });
-    }
+    this.setState({
+      isReplyDelete: !this.state.isReplyDelete,
+    });
   };
-  // Comment Like
 
+  // Comment Like
   replyLikeUp = () => {
-    if (!this.state.isReplyLike) {
-      this.setState({
-        isReplyLike: true,
-      });
-    } else {
-      this.setState({
-        isReplyLike: false,
-      });
-    }
+    this.setState({
+      isReplyLike: !this.state.isReplyLike,
+    });
   };
 
   render() {
     const { newReplyAdd } = this.props;
+    const { isReplyDelete, isReplyLike } = this.state;
+
     return (
       <div
         className={
-          this.state.isReplyDelete
+          isReplyDelete
             ? "content_peed_text_reply reply_remove"
             : "content_peed_text_reply"
         }
       >
         <div>
-          {/* <li>{"meeeeen93 " + newReplyAdd}</li> */}
           <li>
-            {newReplyAdd.commentName} {newReplyAdd.commentContent}
+            <span>{newReplyAdd.commentName}</span>
+            <span>{newReplyAdd.commentContent}</span>
           </li>
         </div>
         <div>
           <i
             className={
-              this.state.isReplyLike
-                ? "fas fa-heart likeit_change"
-                : "fas fa-heart"
+              isReplyLike ? "fas fa-heart likeit_change" : "fas fa-heart"
             }
             onClick={this.replyLikeUp}
           ></i>

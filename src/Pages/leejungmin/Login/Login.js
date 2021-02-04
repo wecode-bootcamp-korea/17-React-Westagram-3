@@ -9,6 +9,8 @@ class LoginLee extends Component {
       id: "",
       pwd: "",
       isDisabled: true,
+      name: "jungmin",
+      phone: "010-1234-5678",
     };
   }
   idSet = (e) => {
@@ -22,7 +24,25 @@ class LoginLee extends Component {
     });
   };
 
-  loginValid = () => {
+  // loginValid = (e) => {
+  // e.preventDefault();
+
+  //   if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
+  //     this.setState({
+  //       isDisabled: false,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       isDisabled: true,
+  //     });
+  //   }
+  // };
+  btnCheck = (e) => {
+    if (!this.state.id || this.state.pwd >= 5) {
+      this.idSet(e);
+    } else if (this.state.id || !this.state.pwd) {
+      this.pwdSet(e);
+    }
     if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
       this.setState({
         isDisabled: false,
@@ -33,44 +53,90 @@ class LoginLee extends Component {
       });
     }
   };
-  goToMain = (e) => {
+
+  goToMain = () => {
+    this.props.history.push("/mainLee");
+  };
+
+  loginValid = (e) => {
+    e.preventDefault();
+
     if (this.state.id.includes("@") && this.state.pwd.length >= 5) {
-      console.log("id 값은 =" + this.state.id);
-      console.log("pwd 값은 =" + this.state.pwd);
-      alert(this.state.id + "님 어서오세용");
-      this.props.history.push("/mainLee");
+      this.setState({
+        isDisabled: false,
+      });
+      fetch("http://10.58.4.186:8000/user", {
+        method: "POST",
+        body: JSON.stringify({
+          email: this.state.id,
+          password: this.state.pwd,
+          // name: this.state.name,
+          // phone: this.state.phone,
+        }),
+      })
+        .then((response) => response.json())
+        .then((res) => this.joinCheckResult(res));
+      // .then((res) => this.loginCheckResult(res));
+      // .then((res) => console.log("백엔드에서 온 데이터 : ", res));
+      // alert(this.state.id + "님 어서오세용");
+      // this.props.history.push("/mainLee");
+      console.log(this.state.isDisabled);
     } else {
-      alert("아이디 비밀번호 확인점 해주세여 ~");
-      e.preventDefault();
+      this.setState({
+        isDisabled: true,
+      });
+      alert("아이디와 비밀번호 입력 기준이 틀렸습니다 !");
     }
   };
 
+  joinCheckResult = (res) => {
+    if (res.message === "SUCCESS") {
+      alert("회원가입을 축하드립니다 ! ");
+    } else {
+      alert("회원가입이 실패하셨습니다 !");
+    }
+  };
+
+  loginCheckResult = (res) => {
+    if (res.message === "SUCCESS") {
+      console.log(res);
+      localStorage.getItem("token", res.access_token);
+      this.goToMain();
+    } else {
+      alert("너 우리 회원아님 !");
+    }
+  };
   render() {
+    console.log(this.state.isDisabled);
+    console.log("아이디", this.state.id);
+    console.log("비번", this.state.pwd);
     return (
       <div>
         <main className="container_main_login">
           <div className="container_sub_login">
             <span className="login_logo">westagram</span>
-            <form action="/" className="login_form" onKeyUp={this.loginValid}>
+            <form action="/" className="login_form">
               <input
                 type="text"
                 className="login_id"
                 placeholder="전화번호, 사용자 이름 또는 이메일"
-                onChange={this.idSet}
+                onChange={this.btnCheck}
               />
               <input
                 type="password"
                 className="login_pw"
                 placeholder="비밀번호"
-                onChange={this.pwdSet}
+                onChange={this.btnCheck}
               />
               <input
                 type="submit"
                 className={
-                  this.state.isDisabled ? "login_form_submit" : "color_change"
+                  this.state.isDisabled
+                    ? "login_form_submit"
+                    : "login_form_submit:disabled"
                 }
                 value="로그인"
-                onClick={this.goToMain}
+                onClick={this.loginValid}
                 disabled={this.state.isDisabled}
               ></input>
             </form>

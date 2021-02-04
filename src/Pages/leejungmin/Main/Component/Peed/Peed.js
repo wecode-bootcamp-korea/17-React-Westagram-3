@@ -39,9 +39,12 @@ class Peed extends Component {
         commentName: "meeeeen93",
         commentContent: this.state.newReply,
       };
-      console.log("fefwf", newComment);
+      // const newComments = this.state.replyArr.concat(newComment);
+
+      const newComments = [...this.state.replyArr, newComment];
+
       this.setState({
-        replyArr: this.state.replyArr.concat(newComment),
+        replyArr: newComments,
         newReply: "",
       });
     }
@@ -107,7 +110,7 @@ class Peed extends Component {
             </div>
             <div className="content_peed_option_sub_header">
               <span className="peed_option_sub_header_like">
-                좋아요{" "}
+                좋아요
                 <span>
                   {this.state.isPeedLike
                     ? peedData.peedLikeNum + 1
