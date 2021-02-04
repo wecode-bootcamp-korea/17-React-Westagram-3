@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Nav from "../../../Components/Nav/Nav";
 import Story from "./Component/Story/Story";
 import Peed from "./Component/Peed/Peed";
+import Follow from "./Component/Follow/Follow";
 
 import "./Main.scss";
 
@@ -53,13 +54,45 @@ class MainLee extends Component {
           storyName: "bobbob.spoji",
         },
       ],
+      followArr: [
+        {
+          followName: "queen_cok",
+          followImg:
+            "https://media.vlpt.us/images/93jm/post/9e58283b-c1c7-4d0c-9e37-61a2fed05ee9/hancok.jpg",
+          followText: "jinjja_naruto님 외 14명이 팔로우합니다.",
+        },
+        {
+          followName: "dog_man",
+          followImg:
+            "https://media.vlpt.us/images/93jm/post/ed08fe64-bd4c-4f44-b646-b950ec54a7e4/inuyashy.png",
+          followText: "Westagram 신규 가입",
+        },
+        {
+          followName: "talju.jinja",
+          followImg:
+            "https://media.vlpt.us/images/93jm/post/b85dd3c2-a58c-4550-98e7-4d65782cc53d/sasukae.jpg",
+          followText: "jinjja_naruto님 외 2명이 팔로우합니다.",
+        },
+        {
+          followName: "1993.gumsu",
+          followImg:
+            "https://media.vlpt.us/images/93jm/post/c2108105-e9bf-4998-95b9-94d73a756b88/gumsu.png",
+          followText: "fire_jumeog_ace님이 팔로우합니다.",
+        },
+        {
+          followName: "power.baejiter_",
+          followImg:
+            "https://media.vlpt.us/images/93jm/post/0064982c-bdb4-450b-a2f9-c5bc87c67afc/baejiter.jpg",
+          followText: "piccolo님이 팔로우합니다.",
+        },
+      ],
       peedArr: [],
     };
   }
 
   // peed fetch
   componentDidMount() {
-    fetch("http://localhost:3000/data/peedData.json", {
+    fetch("data/peedData.json", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -71,11 +104,10 @@ class MainLee extends Component {
   }
 
   render() {
-    const { storyArr, peedArr } = this.state;
+    const { storyArr, peedArr, followArr } = this.state;
 
     return (
       <div>
-        {/* <body id="main_layout"> */}
         <Nav></Nav>
         <main className="main_content">
           <div className="main_content_left">
@@ -109,86 +141,13 @@ class MainLee extends Component {
                 <span>모두 보기</span>
               </div>
               <div className="sidebar_friend_recommend">
-                <div className="friend_recommend-1">
-                  <div className="recommend_left-1">
-                    <img
-                      src="/images/leejungmin/hancok.jpg"
-                      alt="friend_recommend-1"
-                    />
-                    <div className="recommend_profile_nametag-1">
-                      <span>queen_cok</span>
-                      <span>jinjja_naruto님 외 14명이 팔로우합니다.</span>
-                    </div>
-                  </div>
-                  <div className="recommend_right-1">
-                    <span>팔로우</span>
-                  </div>
-                </div>
-                <div className="friend_recommend-2">
-                  <div className="recommend_left-2">
-                    <img
-                      src="/images/leejungmin/inuyashy.png"
-                      alt="friend_recommend-2"
-                    />
-                    <div className="recommend_profile_nametag-2">
-                      <span>dog_man</span>
-                      <span>Westagram 신규 가입</span>
-                    </div>
-                  </div>
-                  <div className="recommend_right-2">
-                    <span>팔로우</span>
-                  </div>
-                </div>
-                <div className="friend_recommend-3">
-                  <div className="recommend_left-3">
-                    <img
-                      src="/images/leejungmin/sasukae.jpg"
-                      alt="friend_recommend-3"
-                    />
-                    <div className="recommend_profile_nametag-3">
-                      <span>talju.jinja</span>
-                      <span>jinjja_naruto님 외 2명이 팔로우합니다.</span>
-                    </div>
-                  </div>
-                  <div className="recommend_right-3">
-                    <span>팔로우</span>
-                  </div>
-                </div>
-                <div className="friend_recommend-4">
-                  <div className="recommend_left-4">
-                    <img
-                      src="/images/leejungmin/gumsu.png"
-                      alt="friend_recommend-4"
-                    />
-                    <div className="recommend_profile_nametag-4">
-                      <span>1993.gumsu</span>
-                      <span>fire_jumeog_ace님이 팔로우합니다.</span>
-                    </div>
-                  </div>
-                  <div className="recommend_right-4">
-                    <span>팔로우</span>
-                  </div>
-                </div>
-                <div className="friend_recommend-5">
-                  <div className="recommend_left-5">
-                    <img
-                      src="/images/leejungmin/baejiter.jpg"
-                      alt="friend_recommend-5"
-                    />
-                    <div className="recommend_profile_nametag-5">
-                      <span>power.baejiter_</span>
-                      <span>piccolo님이 팔로우합니다.</span>
-                    </div>
-                  </div>
-                  <div className="recommend_right-5">
-                    <span>팔로우</span>
-                  </div>
-                </div>
+                {followArr.map((follow, index) => {
+                  return <Follow followRecom={follow} key={index} />;
+                })}
               </div>
             </div>
           </div>
         </main>
-        {/* </body> */}
       </div>
     );
   }

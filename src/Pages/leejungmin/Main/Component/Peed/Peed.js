@@ -32,6 +32,7 @@ class Peed extends Component {
       () => {
         const { newReply } = this.state;
         const isBtnActive = newReply.length > 0;
+        //newReply.length > 0 이 참이면 true 아니면 false를 isBtnActive에 넣어준다
         this.setState({
           isReplyAddBtn: isBtnActive,
         });
@@ -80,25 +81,18 @@ class Peed extends Component {
   };
 
   // peed Like it!!
-  peedLikeUp = () => {
+  peedLikeUp = (e) => {
     const { isPeedLike } = this.state;
-    if (!isPeedLike) {
-      this.setState({
-        isPeedLike: true,
-      });
-    } else {
-      this.setState({
-        isPeedLike: false,
-      });
-    }
+    const isPeedLikeActive = !isPeedLike;
+
+    this.setState({
+      isPeedLike: isPeedLikeActive,
+    });
   };
 
   render() {
     const { peedData } = this.props;
     const { isPeedLike, newReply, replyArr, isReplyAddBtn } = this.state;
-    console.log("초기화 될때", newReply);
-    console.log("길이가궁금해 ?", newReply.length);
-    console.log("버튼~", isReplyAddBtn);
 
     return (
       <div>
@@ -170,7 +164,6 @@ class Peed extends Component {
                   ? "content_peed_submit"
                   : "content_peed_submit_on"
               }
-              // className="content_peed_submit"
               value="게시"
               onClick={this.clickAddComment}
               disabled={!isReplyAddBtn}
