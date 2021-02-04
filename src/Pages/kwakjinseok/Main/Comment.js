@@ -4,16 +4,12 @@ import "./Comment.scss";
 class Comment extends Component {
 	render() {
 		return (
-			<div className="Comment">
-				{this.props.commentList.map((com) => {
-					return (
-						<li>
-							<span>xolovemirjam </span>
-							{com}
-						</li>
-					);
-				})}
-			</div>
+			<ul className="Comment">
+				<li>
+					<span className="userNameSpan">{this.props.userId}</span>
+					<span> {this.props.comment}</span>
+				</li>
+			</ul>
 		);
 	}
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Comment from "./Comment";
+import Nav from "../../../../src/Components/Nav/Nav";
 import "./Main.scss";
 
 class MainKwak extends Component {
@@ -7,106 +8,43 @@ class MainKwak extends Component {
 		super();
 		this.state = {
 			commentInputValue: "",
-			addComments: [],
+			addComments: [{ idx: 20210203, userId: "", comment: "" }],
 		};
 	}
 
 	handleAddComment = (event) => {
 		this.setState({
-			commentInputValue: `${event.target.value}`,
+			commentInputValue: event.target.value,
 		});
 	};
 
 	handleAddComment2 = (event) => {
-		if (event.keyCode === 13 && this.state.commentInputValue) {
-			this.setState({
-				addComments: this.state.addComments.concat(
-					this.state.commentInputValue
-				),
-				commentInputValue: "",
-			});
+		if (event.keyCode === 13) {
+			this.addComment();
 		}
 	};
 
-	addComment = (event) => {
+	addComment = () => {
 		if (this.state.commentInputValue) {
 			this.setState({
+				addComments: [
+					...this.state.addComments,
+					{
+						idx: Date.now(),
+						userId: "xolovemirjam",
+						comment: this.state.commentInputValue,
+					},
+				],
 				commentInputValue: "",
-				addComments: this.state.addComments.concat(
-					this.state.commentInputValue
-				),
 			});
-
-			// this.state.addComments.push(this.state.commentInputValue);
 		}
-		// const add = this.state.addComments;
-		// const listAdd = add.map((added) => <li>{added}</li>);
-		// this.setState({
-		// 	addComments: ,a
-		// });
-		event.preventDefault();
 	};
 
 	render() {
 		return (
 			<div>
 				<div className="Main">
-					<nav className="nav_container">
-						<div className="nav_container_sub">
-							<div className="nav_left">
-								<i className="fab fa-instagram"></i>
-								<span className="nav_logo">Westagram</span>
-							</div>
-							<div className="nav_center">
-								<form className="nav_center_search">
-									<input
-										type="text"
-										className="center_search"
-										placeholder="검색"
-									/>
-									<i className="fas fa-search search_icon"></i>
-									<i className="fas fa-times-circle cancle_icon"></i>
-								</form>
-							</div>
-							<div className="nav_right">
-								<i className="fas fa-home"></i>
-								<i className="far fa-paper-plane nav_right_plane"></i>
-								<i className="far fa-compass"></i>
-								<i className="far fa-heart"></i>
-								<button className="nav_bar_profile_btn">
-									<img src="/images/trunks.jpg" alt="nav_bar_profile_photo" />
-								</button>
-								<div className="drop_box_main">
-									<div className="drop_box">
-										<div className="drop_box_top">
-											<div className="drop_box_box">
-												<i className="far fa-user"></i>
-												<span>프로필</span>
-											</div>
-											<div className="drop_box_box">
-												<i className="far fa-bookmark"></i>
-												<span>저장됨</span>
-											</div>
-											<div className="drop_box_box">
-												<i className="fas fa-cog"></i>
-												<span>설정</span>
-											</div>
-											<div className="drop_box_box">
-												<i className="fas fa-sync"></i>
-												<span>계정 전환</span>
-											</div>
-										</div>
-										<div className="drop_box_bottom">
-											<a href="login.html">
-												<span>로그아웃</span>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div className="drop_box_diamond"></div>
-							</div>
-						</div>
-					</nav>
+					<Nav />
 
 					<main>
 						<div className="feeds">
@@ -212,7 +150,16 @@ class MainKwak extends Component {
 									</div>
 
 									<ul className="replyContainer">
-										<Comment commentList={this.state.addComments} />
+										{this.state.addComments.map((comments) => {
+											return (
+												<Comment
+													idx={comments.idx}
+													key={comments.idx}
+													comment={comments.comment}
+													userId={comments.userId}
+												/>
+											);
+										})}
 									</ul>
 									<div className="smallTime">6시간 전</div>
 
