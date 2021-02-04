@@ -10,7 +10,7 @@ class MainLeft extends Component {
         <section className="profiles">
           <div className="profile">
             <img src="images/parkjunghyun/profile.jpeg" alt="profile" />
-            <div className="name">asdf</div>
+            <div className="name">박정현</div>
           </div>
         </section>
         <Feeds />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Login.scss';
 import { withRouter } from 'react-router-dom';
+import './Login.scss';
 
 class LoginPark extends Component {
   constructor(props) {
@@ -10,22 +10,9 @@ class LoginPark extends Component {
       id: '',
       pw: '',
     };
-
-    this.handleInput = this.handleInput.bind(this);
-    this.goToMain = this.goToMain.bind(this);
   }
 
-  handleInput(e) {
-    if (e.target.type === 'text') {
-      this.setState({
-        id: e.target.value,
-      });
-    } else if (e.target.type === 'password') {
-      this.setState({
-        pw: e.target.value,
-      });
-    }
-
+  validation = () => {
     if (this.state.id) {
       const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,8}$/i;
       const isGoodId = this.state.id.match(regExp);
@@ -36,42 +23,59 @@ class LoginPark extends Component {
           this.setState({
             isDisabled: false,
           });
+          return true;
         }
       }
     }
-  }
+  };
 
-  goToMain() {
-    if (this.state.id) {
-      const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      const isGoodId = this.state.id.match(regExp);
-      if (isGoodId && this.state.pw) {
-        const regExp = '^[a-zA-Z0-9]{5,}$';
-        const isGoodPw = this.state.pw.match(regExp);
-        if (isGoodPw) {
-          this.setState({
-            isDisabled: false,
-          });
-          alert('id & pw GOOD!');
+  handleInput = (e) => {
+    const { value, name } = e.target;
+
+    this.setState({
+      [name]: value,
+    });
+
+    this.validation();
+  };
+
+  goToMain = (e) => {
+    e.preventDefault();
+
+    const validationResult = this.validation;
+
+    if (validationResult) {
+      fetch('http://10.58.2.215:8000/user/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: this.state.id,
+          password: this.state.pw,
+          account: '',
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
           this.props.history.push('/mainPark');
-        }
-      }
+        });
     }
-  }
+  };
 
   render() {
     return (
       <div className="container">
-        <h1 id="logo">Westagram</h1>
+        <h1 className="logo">Westagram</h1>
         <form>
           <input
             className="email"
+            name="id"
             onKeyPress={this.handleInput}
             type="text"
             placeholder="이메일"
           />
           <input
             className="password"
+            name="pw"
             onKeyPress={this.handleInput}
             type="password"
             placeholder="비밀번호"
@@ -85,7 +89,7 @@ class LoginPark extends Component {
           </button>
         </form>
         <footer>
-          <a href="www.naver.com" id="pwmsg">
+          <a href="www.naver.com" className="pwmsg">
             비밀번호를 잊으셨나요?
           </a>
         </footer>
