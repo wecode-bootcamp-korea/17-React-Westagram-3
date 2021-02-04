@@ -14,18 +14,6 @@ export default class Feeds extends Component {
     };
   }
 
-  fetchFunc = (endpoint, key) => {
-    fetch(endpoint, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          key: data,
-        });
-      });
-  };
-
   componentDidMount() {
     fetch('/data/commentData.json', {
       method: 'GET',
@@ -35,7 +23,6 @@ export default class Feeds extends Component {
         this.setState({
           comments: data,
         });
-        console.log(this.state.comments);
       });
 
     fetch('/data/feedsData.json', {
@@ -72,13 +59,16 @@ export default class Feeds extends Component {
     e.target[0].value = '';
   };
 
-  changeImg = () => {
-    // console.log(this.state.comments);
-    // // like = !like;
-    // this.setState({
-    //   comment: { id: key, isLiked: false },
-    // });
-    // console.log(this.state.comments);
+  changeImg = (id) => {
+    const changedCmt = this.state.comments.map((comment) => {
+      if (comment.id === id) {
+        comment.isLiked = !comment.isLiked;
+      }
+      return comment;
+    });
+    this.setState({
+      commments: changedCmt,
+    });
   };
 
   render() {
@@ -103,9 +93,10 @@ export default class Feeds extends Component {
                 return (
                   <Comments
                     key={comment.id}
+                    id={comment.id}
                     text={comment.content}
                     like={comment.isLiked}
-                    changeImg={this.changeImg}
+                    changeImg={(id) => this.changeImg(id)}
                   />
                 );
               })}

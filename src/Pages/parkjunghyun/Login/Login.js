@@ -56,9 +56,26 @@ class LoginPark extends Component {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          // if (data.AUTHORIZATION) {
+          //   localStorage.setItem('test-token', data.AUTHORIZATION);
+          // }
           this.props.history.push('/mainPark');
         });
     }
+
+    // ## access token으로 로그인
+    // let token = localStorage.getItem('test-token') || '';
+
+    // fetch('http://10.58.2.215:8000/posting', {
+    //   method: 'POST',
+    //   headers: {
+    //     AUTHORIZATION: token,
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
   };
 
   render() {

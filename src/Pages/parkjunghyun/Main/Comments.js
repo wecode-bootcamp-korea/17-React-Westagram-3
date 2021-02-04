@@ -23,7 +23,9 @@ export default class Comments extends Component {
                 : '/images/parkjunghyun/heart.png'
             }
             alt="heart"
-            onClick={changeImg}
+            onClick={() => {
+              changeImg(this.props.id);
+            }}
           />
         </p>
       </div>
