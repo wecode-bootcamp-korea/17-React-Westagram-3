@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import Nav from '../../../Components/Nav/Nav';
-//import Storybox from '../Main/Storybox/Storybox';
-//import STORYFEED from './Storyfeed/Storyfeed.js';
 import Comment from '../Main/Comment/Comment';
 import './Main.scss';
 import Storybox from '../Main/Storybox/Storybox'
-//import Storybox from './Storyfeed/Storyfeed.js';
-//import Storyfeed from './Storyfeed/Storyfeed.js';
-
 
 class MainHeo extends Component {
     constructor() {
