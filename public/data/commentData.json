@@ -2,25 +2,21 @@
   {
     "id": 1,
     "userName": "hyuk",
-    "comment": "jeju-jeju",
-    "isLiked": true
+    "comment": "룰루랄라"
   },
   {
     "id": 2,
     "userName": "171014",
-    "comment": "여기는 비자림 가는 길🌳",
-    "isLiked": false
+    "comment": "여행은 즐거워"
   },
   {
     "id": 3,
     "userName": "choi",
-    "comment": "fun",
-    "isLiked": false
+    "comment": "fun"
   },
   {
     "id": 4,
     "userName": "hyehye",
-    "comment": "happy🎈",
-    "isLiked": true
+    "comment": "happy🎈"
   }
 ]

@@ -17,7 +17,6 @@ class LoginHeo extends Component {
     this.setState({
       [name]: value,
     })
-    console.log(this.state)
   }
 
 //로그인
@@ -38,8 +37,7 @@ class LoginHeo extends Component {
         alert("실패")
       }
     }
-  
-    )}
+  )}
 
 //회원가입
   goToMain = () => {
@@ -52,7 +50,7 @@ class LoginHeo extends Component {
     })
     .then((response) => response.json())
     .then((result) => 
-      result.message === "" ?
+      result.message === "SUCCESS" ?
       this.props.history.push('/loginHeo') 
       :alert("회원가입실패") 
     )

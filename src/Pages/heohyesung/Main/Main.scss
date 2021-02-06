@@ -7,10 +7,9 @@
   background-color: $back-color;
   
   i {
-      margin-top: 5px;
+    margin-top: 5px;
   }
   
-
   .navbar{
     display: flex;
     position: sticky;
@@ -68,148 +67,38 @@
   ul {
       padding: 0;
       font-size: 25px;
-  }
+    }
 
   i {
       margin-right: 15px;
-  }
-
-.mainbigbox {
-    display: flex;
-    justify-content: space-between;
-
-    .leftbox {
-        width:600px;
-        height: 900px;
-        margin-left: 250px;
-
-        .storyboxContainer {
-            display: flex;
-            height: 110px;
-            width: 100%;
-            margin-top: 80px;
-            background-color: $box-color;
-            border: 1px solid $border-color;
-        
     }
-      
-      }
-}
-      
 
-    .navfeedbox {
+    .mainbigbox {
         display: flex;
-        height: 60px;
-        margin-top: 25px;
-        background-color: $box-color;
-        border: 1px solid $border-color;
+        justify-content: space-between;
 
-        .imguser {
-            float: left;
-            width: 35px;
-            height: 35px;
-            margin: 10px 5px 0 10px;
-            border-radius: 100px;
-        }
-          
-        .userid {
-            display: inline-block;
-            margin: 22px 0 0 5px;
-            font-size: small;
-            font-weight: bold;
-        }
+        .leftbox {
+            width:600px;
+            height: 900px;
+            margin-left: 250px;
 
-    }
-
-    .feedbox {
-        display: flex;
-        height: 600px;
-        margin-top: 0px;
-
-        .imgjeju {
-            width: 600px;
-            height: 600px;
-            background-size: cover;
-            background-position: center;
-            border:1px solid solid none solid $border-color;
+            .storyboxContainer {
+                display: flex;
+                height: 110px;
+                width: 100%;
+                margin-top: 80px;
+                background-color: $box-color;
+                border: 1px solid $border-color;
+            }             
         }
     }
 
-    .commentfirstbox {
-        height: 60px;
-        background-color: $box-color;
-        border-left:1px solid $border-color;
-        border-right: 1px solid $border-color;
-
-        .commenticons {
-            margin: 0 0 0 10px;
-            padding-top: 10px;
-        }
-
-        .like {
-            margin-top: 5px;
-            font-size: 13px;
-            font-weight: bold;
-        }
+    .emptyBox {
+        color : rgb(192, 208, 253);
     }
 
-    .commentBox {
-        padding-top: 10px;
-        background-color:$box-color;
-        border-left:1px solid $border-color;
-        border-right: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
-
-        .feeduser {
-            display: inline-block;
-            margin: 0 0 5px 10px;
-            padding-top: 5px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-          
-
-        span {
-            margin-left: 10px;
-            font-size: 14px;
-        }
-
-      }
-
-    .addcomment {
-        width: 600px;
-        height: 60px;
-        background-color: $box-color;
-        border:1px solid $border-color;
-
-        .commentline {
-            width: 530px;
-            height: 59px;
-            margin-left: 0;
-            padding-left: 10px;
-            padding-right: 0px;
-            padding-bottom: 0px;
-            background-color: $box-color;
-            border: 1px none;
-            font-weight: 500;
-            text-align: left;
-            border-bottom:1px solid $border-color;
-        }
-
-        .submitbox {
-            margin-left: 15px;
-            color: #C0D0FD;
-            border: none;
-            background-color: $box-color;
-            
-        .emptyBox {
-            color : rgb(192, 208, 253);
-        }
-
-        .writeBox {
-            color:rgb(8, 150, 247);
-        }
-        }
+    .writeBox {
+        color:rgb(8, 150, 247);
     }
 
     .rightbox {
@@ -242,7 +131,7 @@
                 color: #1A9FF7;
                 font-size: 13px;
             }
-          }
+        }
     
         .sidetext {
             display: inline-block;
@@ -256,26 +145,5 @@
             padding-left: 5px;
             font-size: small;
         }
-        
-        .iuimg {
-            float: left;
-            margin: 5px 5px 0 20px;
-            width: 45px;
-            height: 45px;
-            border-radius: 100px;
-        }
-        
-        .smalltext1 {
-            display: inline-block;
-            margin: 16px 100px 16px 15px;
-            font-weight: bold;
-        }
-
-        .endtextblueside {
-            display: inline-block;
-            margin-right: 0;
-            color: #1A9FF7;
-            font-size: 13px;
-        }
     }
-  }
+}
