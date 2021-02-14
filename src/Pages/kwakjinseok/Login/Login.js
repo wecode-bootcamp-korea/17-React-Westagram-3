@@ -16,7 +16,6 @@ class LoginKwak extends Component {
 			idInputValue: `${event.target.value}`,
 		});
 	};
-
 	handlePwInput = (event) => {
 		this.setState({
 			pwInputValue: `${event.target.value}`,
@@ -24,10 +23,35 @@ class LoginKwak extends Component {
 	};
 
 	goToMain = () => {
-		if (this.goToMain) {
-			alert("로그인 성공!");
-		}
 		this.props.history.push("/mainKwak");
+	};
+
+	handleLogin = () => {
+		const { idInputValue, pwInputValue } = this.state;
+
+		fetch("http://192.168.43.45:8000/user/signin", {
+			method: "POST",
+			body: JSON.stringify({
+				email: idInputValue,
+				password: pwInputValue,
+			}),
+		})
+			.then((response) => response.json())
+			.then((result) => {
+				// 회원가입
+				// result.message === "SUCCESS"
+				// 	? alert("오이오이 히사시부리")
+				// 	: alert("만 19세 미만입니다");
+
+				// 회원가입 후 로그인
+				if (result.TOKEN) {
+					localStorage.setItem("token", result.TOKEN);
+					alert("축하합니다");
+					this.props.history.push("/mainKwak");
+				} else {
+					alert("아이디나 비밀번호를 확인해주세요.");
+				}
+			});
 	};
 
 	render() {
@@ -65,7 +89,7 @@ class LoginKwak extends Component {
 									? false
 									: true
 							}
-							onClick={this.goToMain}
+							onClick={this.handleLogin}
 						>
 							로그인
 						</button>
